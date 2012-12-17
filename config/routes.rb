@@ -1,7 +1,11 @@
 KboServer::Application.routes.draw do
 
-  devise_for :users
+  get "users/show"
 
+  get "user/show"
+
+  devise_for :users
+  match 'users/:id(.format)' => "users#show", :via => :get, :constraints => {:id => /\d+/}
   match 'users/session(.format)' => "sessions#create", :via => :post
   match 'users/session(.format)' => "sessions#destroy", :via => :delete
 
