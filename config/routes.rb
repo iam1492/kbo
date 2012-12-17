@@ -1,5 +1,9 @@
 KboServer::Application.routes.draw do
+
   devise_for :users
+
+  match 'users/session(.format)' => "sessions#create", :via => :post
+  match 'users/session(.format)' => "sessions#destroy", :via => :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

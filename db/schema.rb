@@ -11,12 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216135653) do
+ActiveRecord::Schema.define(:version => 20121217140227) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "comment",    :default => "", :null => false
+    t.integer  "team_idx",                   :null => false
+    t.integer  "out_count",  :default => -1
+    t.integer  "strike",     :default => -1
+    t.integer  "ball",       :default => -1
+    t.string   "base",       :default => ""
+    t.string   "stage",      :default => ""
+    t.string   "game_id",    :default => ""
+    t.string   "type",       :default => ""
+    t.integer  "user_id",                    :null => false
+    t.string   "extra_1"
+    t.string   "extra_2"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "comments", ["game_id"], :name => "index_comments_on_game_id"
 
   create_table "users", :force => true do |t|
     t.string   "imei",                   :default => "", :null => false
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "name",                   :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
