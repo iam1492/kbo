@@ -9,6 +9,10 @@ KboServer::Application.routes.draw do
   match 'users/session(.format)' => "sessions#create", :via => :post
   match 'users/session(.format)' => "sessions#destroy", :via => :delete
 
+  match 'comments(.format)' => "comments#create", :via => :post
+  match 'comments/:id(.format)' => "comments#show", :via => :get, :constraints => {:id => /\d+/}
+  match 'team_comments(.format)' => "comments#get_team_comments", :via => :get
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

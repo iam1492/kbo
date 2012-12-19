@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
     respond_to do |format|
     	format.html
-    	format.json { render_for_api :info, 
+    	format.json { render_for_api :user_with_comments, 
     		:json => @user, :root => :user }
     end
   end
