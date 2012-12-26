@@ -11,8 +11,11 @@ class User < ActiveRecord::Base
   has_many :comments
 
   acts_as_api
+  acts_as_followable
+  acts_as_follower
 
   api_accessible :user_with_comments do |template|
+    template.add :id
     template.add :name
     template.add :email
     template.add :profile_url
@@ -20,6 +23,16 @@ class User < ActiveRecord::Base
     template.add :alert_count
     template.add :nick_count
     template.add :comments
+  end
+
+  api_accessible :user_without_comments do |template|
+    template.add :id
+    template.add :name
+    template.add :email
+    template.add :profile_url
+    template.add :block_count
+    template.add :alert_count
+    template.add :nick_count
   end
 
   api_accessible :user_with_comments do |t|

@@ -6,9 +6,16 @@ class CommentsController < ApplicationController
     respond_with @comment, :api_template => :user_with_comments
   end
 
-  def get_team_comments
-    @team_idx = params[:comment][:team_idx]
-    @comment = Comment.find_all_by_team_idx(@team_idx)
+  def get_comments
+    @team_idx = params[:team_idx]
+    @comment = Comment.getComments(@team_idx, 200);
+    respond_with @comment, :api_template => :user_with_comments
+  end
+
+  def get_more_comments
+    @createdAt = params[:created_at]
+    @team_idx = params[:team_idx]
+    @comment = Comment.getMoreComments(@createdAt, @team_idx)
     respond_with @comment, :api_template => :user_with_comments
   end
 

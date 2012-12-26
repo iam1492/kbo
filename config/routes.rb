@@ -11,8 +11,11 @@ KboServer::Application.routes.draw do
 
   match 'comments(.format)' => "comments#create", :via => :post
   match 'comments/:id(.format)' => "comments#show", :via => :get, :constraints => {:id => /\d+/}
-  match 'team_comments(.format)' => "comments#get_team_comments", :via => :get
+  match 'get_comments(.format)' => "comments#get_comments", :via => :get
+  match 'get_more_comments(.format)' => "comments#get_more_comments", :via => :get
   
+  match 'users/:id/block(.format)' => "users#block_user", :via => :post
+  match 'users/blocks(.format)' => "users#get_blocked_user_list", :via => :get
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

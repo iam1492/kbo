@@ -7,4 +7,26 @@ class UsersController < ApplicationController
     		:json => @user, :root => :user }
     end
   end
+
+  def block_user
+  	@will_blocked_user_id = params[:user_id]
+  	@will_blocked_user = User.find_by_id(@will_blocked_user_id)
+
+  	current_user.follow(@will_blocked_user)
+	meta_data = { :result => "success" }
+  	respond_to do |format|
+    	format.html
+    	format.json { render_for_api :user_without_comments, 
+    		:json => @will_blocked_user, :root => :user, :meta => meta_data }
+    end
+  end
+
+  def get_blocked_user_list
+  	@blocked_users = current_user.all_following
+  	respond_to do |format|
+    	format.html
+    	format.json { render_for_api :user_without_comments, 
+    		:json => @blocked_users, :root => :user }
+    end
+  end
 end
